@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "description": "It's not a database, it's a gun",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
-    "start": "proxyreload ./app.js --port=3003 --throttle=150",
+    "start": "proxyreload ./index.js --port=3003 --throttle=150",
     "//start": "node index.js"
   },
   "repository": {

@@ -1,7 +1,7 @@
 var express = require('express');
 var moment = require('moment');
 var router = express.Router();
-var targets = require('../mock-data/targets.json');
+var targets = require('./mock-data/targets.json');
 
 
 router.get('/', function(req, res) {
