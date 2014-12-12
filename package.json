@@ -5,15 +5,13 @@
   "description": "It's not a database, it's a gun",
   "main": "index.js",
   "scripts": {
+    "///start": "npm run",
     "start": "proxyreload ./index.js --port=3003 --throttle=150",
     "//start": "node index.js"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/thomax/stringgun.io"
-  },
-  "engines": {
-    "node": "0.10.x"
   },
   "dependencies": {
     "es6-shim": "^0.12.0",
