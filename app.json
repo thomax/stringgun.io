@@ -1,0 +1,7 @@
+{
+  "name": "Stringgun.io",
+  "description": "it's not at database, it's a gun",
+  "repository": "https://github.com/thomax/stringgun.io",
+  "logo": "http://node-js-sample.herokuapp.com/node.svg",
+  "keywords": ["node", "express", "static"]
+}
