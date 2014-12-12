@@ -5,9 +5,8 @@
   "description": "It's not a database, it's a gun",
   "main": "index.js",
   "scripts": {
-    "///start": "npm run",
-    "start": "proxyreload ./index.js --port=3003 --throttle=150",
-    "//start": "node index.js"
+    "//start": "proxyreload ./index.js --port=3003 --throttle=150",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
