@@ -98,21 +98,20 @@ module.exports = {
     });
   },
 
+
   appendString: function(targetName, token, string, callback) {
     getToken(targetName, function (actualToken) {
-      if (actualToken == token) {
-        var key = 'target.'+targetName+'.string.'+moment().utc().valueOf();
-        db.put(key, string, function (err) {
-          if (err) {
-            console.log('Failed to instert string in DB', string, err);
-            return callback(err);
-          }
-          return callback(key.split('.').pop());
-        });
-      } else {
-        console.log('Fake token, no append today', string, err);
+      if (actualToken != token) {
         return callback(false);
       }
+      var key = 'target.'+targetName+'.string.'+moment().utc().valueOf();
+      db.put(key, string, function (err) {
+        if (err) {
+          console.log('Failed to instert string in DB', string, err);
+          return callback(err);
+        }
+        return callback(key.split('.').pop()); // only return timestamp
+      });
     });
   }
 

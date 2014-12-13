@@ -21,8 +21,6 @@ router.get('/', function(req, res) {
 
 
 router.get('/:target', function (req, res) {
-  console.log('get', req.params.target);
-
   data.getStrings(req.params.target, function(result) {
     if (result === false) {
       return res.status(404).send('Target not found');
@@ -52,7 +50,6 @@ router.get('/:target', function (req, res) {
 
 
 router.post('/new', function (req, res) {
-  console.log('AA', req);
   data.createNewTarget(function (result) {
     var getUrl = req.protocol+'://'+req.headers.host+'/'+result.targetName;
     var urls = {
@@ -65,7 +62,6 @@ router.post('/new', function (req, res) {
 
 
 router.post('/:target', function (req, res) {
-  console.log('post', req.body);
   var targetName = req.params.target.split(':')[0];
   var token = req.params.target.split(':')[1];
 
