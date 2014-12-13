@@ -52,10 +52,12 @@ router.get('/:target', function (req, res) {
 
 
 router.post('/new', function (req, res) {
+  console.log('AA', req);
   data.createNewTarget(function (result) {
+    var getUrl = req.protocol+'://'+req.headers.host+'/'+result.targetName;
     var urls = {
-      getUrl: req.hostname+'/'+result.targetName,
-      postUrl: req.hostname+'/'+result.targetName+':'+result.token
+      getUrl: getUrl,
+      postUrl: getUrl+':'+result.token
     }
     res.status(201).type('application/json').send(urls);
   });
