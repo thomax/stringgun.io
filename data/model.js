@@ -22,14 +22,24 @@ function generateToken() {
   return 'tok'+random();
 }
 
-function getToken(targetName, cb) {
+function getToken(targetName, callback) {
   db.get('target.'+targetName+'.token', function (err, token) {
     if (err) {
-      return console.log('Failed to get target token'+targetName, err);
+      return callback(null);
     }
-    console.log('Got token!'+targetName, err);
-    return cb(token);
+    console.log('Got token! '+targetName, token);
+    return callback(token);
   });
+}
+
+function targetExists(targetName, callback) {
+  getToken(targetName, function(token) {
+    if (token) {
+      return callback(true);
+    } else {
+      return callback(false);
+    }
+  })
 }
 
 // known keys
@@ -38,7 +48,7 @@ function getToken(targetName, cb) {
 
 module.exports = {
 
-  createNewTarget: function(cb) {
+  createNewTarget: function(callback) {
     var targetName = generateTargetName();
     var token = generateToken();
     var result = targetName+':'+token;
@@ -48,39 +58,54 @@ module.exports = {
         return console.log('Failed to create target'+targetName, err);
       }
       console.log('Created target', result);
-      return cb(result);
+      return callback(result);
     });
   },
 
-  getStrings: function(targetName) {
-    return getToken(targetName).then(function (token) {
-      return db.get('target.'+targetName+'.strings', function (err, value) {
-        if (err) {
-          return console.log('Couldnt get strings for '+targetName, err);
-        }
-        console.log('name=' + value);
-        return value || 'NONE';
-      });
+  // db.createReadStream({
+  //   start     : 'somewheretostart'
+  //   , end       : 'endkey'
+  //   , limit     : 100           // maximum number of entries to read
+  //   , reverse   : true          // flip direction
+  //   , keys      : true          // see db.createKeyStream()
+  //   , values    : true          // see db.createValueStream()
+  // })
+  getStrings: function(targetName, callback) {
+    targetExists(targetName, function(yes) {
+      if (yes) {
+        var prefix = 'target.'+targetName+'.string.';
+        var strings = [];
+        db.createReadStream({
+          start : prefix,
+          end   : prefix + '\xFF' // stop at the last key with the prefix
+        })
+        .on('data', function (string) {
+          strings.push(string);
+        })
+        .on('error', callback)
+        .on('close', function () {
+          callback(strings);
+        });
+      } else {
+        callback(false);
+      }
     });
   },
 
-  appendString: function(targetName, token, string, cb) {
+  appendString: function(targetName, token, string, callback) {
     getToken(targetName, function (actualToken) {
-      console.log('appendString', targetName, string, token);
       if (actualToken == token) {
         var key = 'target.'+targetName+'.string.'+moment().utc().valueOf();
-        console.log('appendString key', key);
         db.put(key, string, function (err) {
           if (err) {
-            console.log('Failed append string', string, err);
-            return null;
+            console.log('Failed to instert string in DB', string, err);
+            return err;
           }
-          console.log('appended string to', key);
-          return cb(key);
+          return callback(key.split('.').pop());
         });
       } else {
         console.log('Fake token, no append today', string, err);
-        return null;
+        return callback(false);
       }
     });
   }
