@@ -27,7 +27,6 @@ function getToken(targetName, callback) {
     if (err) {
       return callback(null);
     }
-    console.log('Got token! '+targetName, token);
     return callback(token);
   });
 }
@@ -79,8 +78,12 @@ module.exports = {
           start : prefix,
           end   : prefix + '\xFF' // stop at the last key with the prefix
         })
-        .on('data', function (string) {
-          strings.push(string);
+        .on('data', function (row) {
+          var obj = {
+            time: row.key.split('.').pop(),
+            string: row.value
+          };
+          strings.push(obj);
         })
         .on('error', callback)
         .on('close', function () {
@@ -99,7 +102,7 @@ module.exports = {
         db.put(key, string, function (err) {
           if (err) {
             console.log('Failed to instert string in DB', string, err);
-            return err;
+            return callback(err);
           }
           return callback(key.split('.').pop());
         });

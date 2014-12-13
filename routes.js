@@ -4,44 +4,59 @@ var router = express.Router();
 
 var data = require('./data/model');
 
+
+function requestAccepts(req) {
+  var param = req.query.type;
+  if (param) return param;
+  if (req.accepts('application/json')) return 'json';
+  if (req.accepts('text/html')) return 'html';
+  return 'plaintext';
+}
+
 router.get('/', function(req, res) {
   res.render('index', {
     time: moment().calendar()
   });
 });
 
+
 router.get('/:target', function (req, res) {
   console.log('get', req.params.target);
+
   data.getStrings(req.params.target, function(result) {
     if (result === false) {
       return res.status(404).send('Target not found');
     }
 
+    var responseType = requestAccepts(req);
+
     res.status(200);
-    if (req.accepts('application/json')) {
-      return res.type('application/json').send(JSON.stringify(result));
+    if (responseType == 'json') {
+      return res.type('application/json').send(result);
     }
 
-    if (req.accepts('html')) {
+    if (responseType == 'html') {
       result = result.map(function (item) {
-        return item.value;
+        return item.string;
       });
       return res.type('text/html').render('target', {strings: result});
     }
 
     var plainText = '';
     result.map(function (item) {
-      plainText = plainText + item.value+'\n';
+      plainText = plainText + item.string+'\n';
     });
     return res.type('text/plain').status(200).send(plainText);
   });
 });
+
 
 router.post('/new', function (req, res) {
   data.createNewTarget(function (result) {
     res.status(201).type('application/json').send(result);
   });
 });
+
 
 router.post('/:target', function (req, res) {
   console.log('post', req.body);
