@@ -53,7 +53,11 @@ router.get('/:target', function (req, res) {
 
 router.post('/new', function (req, res) {
   data.createNewTarget(function (result) {
-    res.status(201).type('application/json').send(result);
+    var urls = {
+      getUrl: req.hostname+'/'+result.targetName,
+      postUrl: req.hostname+'/'+result.targetName+':'+result.token
+    }
+    res.status(201).type('application/json').send(urls);
   });
 });
 

@@ -50,7 +50,10 @@ module.exports = {
   createNewTarget: function(callback) {
     var targetName = generateTargetName();
     var token = generateToken();
-    var result = targetName+':'+token;
+    var result = {
+      targetName: targetName,
+      token: token
+    };
     console.log('createNewTarget', result);
     db.put('target.'+targetName+'.token', token, function (err) {
       if (err) {
