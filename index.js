@@ -9,6 +9,7 @@ var routes = require('./routes');
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
 app.set('views', path.join(__dirname, 'views'));
+app.set("view options", { layout: false });
 app.set('view engine', 'jade');
 
 app.use( bodyParser.json() );

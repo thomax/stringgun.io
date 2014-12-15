@@ -4,9 +4,14 @@ html
   meta(charset='utf-8')
   meta(name='viewport', content='initial-scale=1,maximum-scale=1,user-scalable=no')
   style.
-    body { margin:0; padding:0; }
-
+    body { margin:20px; padding:0; }
+    .stringbox { padding: 1px 0px 1px 0px; }
+    .stringbox:hover { background-color: whitesmoke; }
+    .string {font-family: "courier", "monospace"; font-size: 12px; padding: 0px;}
+    .string:hover { background-color: beige;}
+    
   body
     .strings
       for string in strings
-        .string= string
+        .stringbox
+          span(class="string")= string
