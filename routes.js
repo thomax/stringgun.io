@@ -13,9 +13,23 @@ function requestAccepts(req) {
   return 'plaintext';
 }
 
+
 router.get('/', function(req, res) {
+  var serviceUrl = req.protocol+'://'+req.headers.host;
   res.render('index', {
-    time: moment().calendar()
+    serviceUrl: serviceUrl
+  });
+});
+
+
+router.post('/new', function (req, res) {
+  data.createNewTarget(function (result) {
+    var getUrl = req.protocol+'://'+req.headers.host+'/'+result.targetName;
+    var urls = {
+      getUrl: getUrl,
+      postUrl: getUrl+':'+result.token
+    }
+    res.status(201).type('application/json').send(urls);
   });
 });
 
@@ -49,30 +63,18 @@ router.get('/:target', function (req, res) {
 });
 
 
-router.post('/new', function (req, res) {
-  data.createNewTarget(function (result) {
-    var getUrl = req.protocol+'://'+req.headers.host+'/'+result.targetName;
-    var urls = {
-      getUrl: getUrl,
-      postUrl: getUrl+':'+result.token
-    }
-    res.status(201).type('application/json').send(urls);
-  });
-});
-
-
 router.post('/:target', function (req, res) {
   var targetName = req.params.target.split(':')[0];
   var token = req.params.target.split(':')[1];
-
-  data.appendString(targetName, token, req.body.string, function(result) {
+  var string = req.body.string;
+  if (string.length > 512) {
+    return res.status(400).send('String cannot exceed 512 characters');
+  }
+  data.appendString(targetName, token, string, function(result) {
     if (result === false) {
-      res.status(403).send('Token mismatch');
-    } else
-    if (result.indexOf('Error') > -1) {
-      res.status(500).send('Internal error');
+      return res.status(403).send('Token mismatch');
     }
-    res.status(201).send(result);
+    res.type('application/json').status(201).send(result);
   });
 });
 

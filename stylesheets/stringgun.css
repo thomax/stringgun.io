@@ -1,0 +1,103 @@
+/* index page */
+
+@import url('http://fonts.googleapis.com/css?family=Rajdhani');
+@import url('http://fonts.googleapis.com/css?family=Lato');
+
+.index-page {
+  margin: 0;
+  padding: 0;
+  font-family: 'Rajdhani';
+  background: #ffee72;
+  /*background-image: url("images/bg.jpg");*/
+}
+
+pre {
+  margin: 0;
+  border: 1px solid pink !important;
+  padding: 10px !important;
+  background-color: white;
+  overflow: scroll !important;
+}
+
+a, a:visited {
+  text-decoration: none;
+  color: black;
+}
+
+hr {
+  margin: 0;
+  border: none;
+  height: 50px;
+  background-color: pink;
+}
+
+h1,h2,h3 {
+  margin: 0;
+}
+h1 {
+  font-size: 18.3vw;
+  padding: 0px 20px 0px 20px;
+}
+h2 {
+  padding: 0px 20px 0px 40px;
+  font-size: 2.2vw;
+  text-align: center;
+  letter-spacing: 0.6em;
+  color: #555;
+}
+h3 {
+  padding-bottom: 10px;
+}
+
+#main-box {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  padding-bottom: 100px;
+}
+
+.info {
+  font-size: 120%;
+  background: #ffee72;
+  padding: 20px 5% 20px 10%;
+}
+
+.bullets {
+  padding-top: 100px;
+}
+
+.bullet {
+  list-style-type: none;
+  font-style: bold;
+  font-size: 150%;
+  width: 30%;
+  text-align: center;
+  display: inline-block;
+  transition-duration: 0.2s;
+  transition-property: transform;
+  transform-origin: 0 100%;
+  transform: translateZ(0);
+}
+
+.bullet:hover {
+  transform: skew(-20deg);
+}
+.bullet a {
+  padding: 0;
+  margin: 0;
+  display: block;
+}
+
+
+
+/* target page */
+.target-page {
+  margin: 20px;
+  padding: 0;
+  font-family: "courier", "monospace";
+  font-size: 13px;
+}
+
+.string:hover {
+  background-color: beige;
+}

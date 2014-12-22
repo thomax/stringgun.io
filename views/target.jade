@@ -1,17 +1,12 @@
 doctype html
 html
   head
-  meta(charset='utf-8')
-  meta(name='viewport', content='initial-scale=1,maximum-scale=1,user-scalable=no')
-  style.
-    body { margin:20px; padding:0; }
-    .stringbox { padding: 1px 0px 1px 0px; }
-    .stringbox:hover { background-color: whitesmoke; }
-    .string {font-family: "courier", "monospace"; font-size: 12px; padding: 0px;}
-    .string:hover { background-color: beige;}
+    meta(charset='utf-8')
+    meta(name='viewport', content='initial-scale=1,maximum-scale=1,user-scalable=no')
+    link(rel='stylesheet', href='/stringgun.css')
     
-  body
+  body(class="target-page")
     .strings
       for string in strings
-        .stringbox
-          span(class="string")= string
+        .string
+          span= string

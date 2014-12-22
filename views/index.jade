@@ -1,14 +1,70 @@
 doctype html
 html
   head
-  meta(charset='utf-8')
-  meta(name='viewport', content='initial-scale=1,maximum-scale=1,user-scalable=no')
-  script(src='https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.js')
-  link(href='https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.css', rel='stylesheet')
-  style.
-    body { margin:0; padding:0; }
-    #map { position:absolute; top:0; bottom:0; width:100%; }
+    meta(charset='utf-8')
+    meta(name='viewport', content='initial-scale=1,maximum-scale=1,user-scalable=no')
+    link(rel='stylesheet', href='/prettify/prettify.css', type="text/css")
+    link(rel='stylesheet', href='/stringgun.css')
+    script(type="text/javascript", src='/prettify/prettify.js')
+                
+  body(class="index-page", onload="prettyPrint()")
+    #main-box
+      h1= "Stringgun.io"
+      h2= "It's not at database - it's a gun"
+      ul.bullets
+        li.bullet
+          a(href="#wtf")= "WTF?"
+        li.bullet
+          a(href="#why")= "Yes, but why?"
+        li.bullet
+          a(href="#try")= "Ok, let me try!"
+          
+    hr        
+    a(name="wtf")  
+    .info
+      h3= "WTF?"
+      = "A fast, hassle free and moronically simple way to store and retrieve small chunks of text."
+    
+    hr        
+    a(name="why")
+    .info
+      h3= "Yes, but why?"
+      = "Sometimes a small, specialized tool is superior to a paunchy, swiss-army-framework."
 
-  body
-    h1= "yup it's " + time 
+    hr        
+    a(name="try")
+    .info
+      h3= "Let me try..."
+      - var newCode = 'curl -XPOST \'' + serviceUrl + '/new\''
+      - var newResult = '{\n  "getUrl":"'+serviceUrl+'/tarIxwwitle7srSPWv",\n  "postUrl":"'+serviceUrl+'/tarIxwwitle7srSPWv:tokTvDdBaQUcpM1EoL"\n}'
       
+      div= "First, create your own target"
+      pre(class="prettyprint")
+        = newCode
+      div= "result"
+      pre(class="prettyprint")
+        = newResult
+          
+      br
+      - var postCode = 'curl -XPOST \'' + serviceUrl + '/tarIxwwitle7srSPWv:tokTvDdBaQUcpM1EoL\' -d \'string=First psot!!11!!!1!\''
+      - var postResult = '{\n  "time":"1419261255182",\n  "string":"First psot!!11!!!1!"\n}'
+      div= "Then, post a string to the target postUrl"
+      pre(class="prettyprint")
+        = postCode
+      div= "result"
+      pre(class="prettyprint")
+        = postResult
+
+      br
+      - var getCode = 'curl -XGET \'' + serviceUrl + '/tarIxwwitle7srSPWv\''
+      div= "Whenever you like, get what you've posted with the target getUrl"
+      pre(class="prettyprint")
+        = getCode
+      div= "result"
+      pre(class="prettyprint")
+        = '[\n  {\n    "time":"1419261255182",\n    "string":"First psot!!11!!!1!"\n  }\n]'
+
+      div= "Set the request accept header field if you want the response to be html or plain text instead of json. Or pass e.g. ?type=html on the URL when you perform the get request."
+        
+    hr        
+        

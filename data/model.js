@@ -3,7 +3,7 @@ var moment = require('moment');
 var db = leveldb('./data/stringgun.db');
 
 var randomSource = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-var randomness = 30;
+var randomness = 15;
 
 function random() {
   var result = [];
@@ -54,7 +54,6 @@ module.exports = {
       targetName: targetName,
       token: token
     };
-    console.log('createNewTarget', result);
     db.put('target.'+targetName+'.token', token, function (err) {
       if (err) {
         return console.log('Failed to create target'+targetName, err);
@@ -110,7 +109,11 @@ module.exports = {
           console.log('Failed to instert string in DB', string, err);
           return callback(err);
         }
-        return callback(key.split('.').pop()); // only return timestamp
+        var result = {
+          time: key.split('.').pop(),
+          string: string
+        }
+        return callback(result);
       });
     });
   }
