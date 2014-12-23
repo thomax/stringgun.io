@@ -29,12 +29,14 @@ html
     a(name="why")
     .info
       h3= "Yes, but why?"
-      = "Sometimes a small, specialized tool is superior to a paunchy, swiss-army-framework."
+      = "Sometimes a small, specialized tool is superior to a paunchy, swiss-army solution. Stringgun.io can serve as an app log in the cloud, a cheap-ass chat backend or "
+      a(href="http://www.youtube.com/watch?v=K2P86C-1x3o")= "something completely diffeent"
+      = "."
 
     hr        
     a(name="try")
     .info
-      h3= "Let me try..."
+      h3= "Ok, let me try..."
       - var newCode = 'curl -XPOST \'' + serviceUrl + '/new\''
       - var newResult = '{\n  "getUrl":"'+serviceUrl+'/tarIxwwitle7srSPWv",\n  "postUrl":"'+serviceUrl+'/tarIxwwitle7srSPWv:tokTvDdBaQUcpM1EoL"\n}'
       
@@ -61,10 +63,13 @@ html
       pre(class="prettyprint")
         = getCode
       div= "result"
-      pre(class="prettyprint")
-        = '[\n  {\n    "time":"1419261255182",\n    "string":"First psot!!11!!!1!"\n  }\n]'
+      pre.prettyprint
+        = '[\n  {\n    "time":"1419261255182",\n    "string":"First psot!!11!!!1!"\n  },\n  {\n    "time":"1419261255183",\n    "string":"Next post"\n  }\n]'
 
-      div= "Set the request accept header field if you want the response to be html or plain text instead of json. Or pass e.g. ?type=html on the URL when you perform the get request."
+      br
+      div= "Set the request accept header field if you want the response to be html or plain text instead of json. Or add "
+        span.code= "?type=html|plain|json"
+        = " to the URL when you perform the get request."
         
     hr        
         
