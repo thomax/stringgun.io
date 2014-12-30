@@ -5,9 +5,16 @@ html
     meta(name='viewport', content='initial-scale=1,maximum-scale=1,user-scalable=no')
     link(rel='stylesheet', href='/prettify/prettify.css', type="text/css")
     link(rel='stylesheet', href='/stringgun.css')
+    link(rel="stylesheet", href="//cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.1.1/gh-fork-ribbon.min.css")
     script(type="text/javascript", src='/prettify/prettify.js')
                 
   body(class="index-page", onload="prettyPrint()")
+    
+    div(class="github-fork-ribbon-wrapper right")
+      div(class="github-fork-ribbon")
+        a(href="https://github.com/thomax/stringgun.io")
+          = "Fork me on GitHub"
+
     #main-box
       h1= "Stringgun.io"
       h2= "It's not at database - it's a gun"
