@@ -55,34 +55,34 @@ html
       - var newResult = '{\n  "getUrl":"'+serviceUrl+'/tarIxwwitle7srSPWv",\n  "postUrl":"'+serviceUrl+'/tarIxwwitle7srSPWv:tokTvDdBaQUcpM1EoL"\n}'
       
       div= "First, create your own target"
-      pre(class="prettyprint")
+      pre(class="prettyprint, codebox")
         = newCode
       div= "result"
-      pre(class="prettyprint")
+      pre(class="prettyprint, codebox")
         = newResult
           
       br
       - var postCode = 'curl -XPOST \'' + serviceUrl + '/tarIxwwitle7srSPWv:tokTvDdBaQUcpM1EoL\' -d \'string=First psot!!11!!!1!\''
       - var postResult = '{\n  "time":"1419261255182",\n  "string":"First psot!!11!!!1!"\n}'
       div= "Then, post a string to the target postUrl"
-      pre(class="prettyprint")
+      pre(class="prettyprint, codebox")
         = postCode
       div= "result"
-      pre(class="prettyprint")
+      pre(class="prettyprint, codebox")
         = postResult
 
       br
       - var getCode = 'curl -XGET \'' + serviceUrl + '/tarIxwwitle7srSPWv\''
       div= "Whenever you like, get what you've posted with the target getUrl"
-      pre(class="prettyprint")
+      pre(class="prettyprint, codebox")
         = getCode
       div= "result"
-      pre.prettyprint
+      pre(class="prettyprint, codebox")
         = '[\n  {\n    "time":"1419261255182",\n    "string":"First psot!!11!!!1!"\n  },\n  {\n    "time":"1419261255183",\n    "string":"Next post"\n  }\n]'
 
       br
-      div= "Set the request accept header field if you want the response to be html or plain text instead of json. Or add "
-        span.code= "?type=html|plain|json"
+      div= "Set the request accept header field if you want the response to be html or plain text instead of json. Or simply add "
+        span(class="inline-code")= "?type=html|plain|json"
         = " to the URL when you perform the get request."
         
     hr        

@@ -6,7 +6,7 @@
 .index-page {
   margin: 0;
   padding: 0;
-  font-family: 'Rajdhani', 'Helvetica', 'sans-serif';
+  font-family: 'Helvetica', 'sans-serif';
   background: #fff4de;
 }
 
@@ -31,7 +31,9 @@ a, a:visited {
 }
 
 h1,h2,h3 {
+  font-family: 'Rajdhani', 'Helvetica', 'sans-serif';
   margin: 0;
+  color: rgb(0, 0, 0);;
 }
 h1 {
   font-size: 18.3vw;
@@ -45,6 +47,7 @@ h2 {
   color: #555;
 }
 h3 {
+  font-size: 190%;
   padding-bottom: 10px;
 }
 
@@ -62,7 +65,8 @@ h3 {
 }
 
 .info {
-  font-size: 120%;
+  font-size: 100%;
+  color: rgb(80, 80, 80);;
   padding: 20px 10% 20px 10%;
 }
 
@@ -72,8 +76,9 @@ h3 {
 }
 
 .bullet {
+  font-family: 'Rajdhani', 'Helvetica', 'sans-serif';
   list-style-type: none;
-  font-style: bold;
+  font-weight: bold;
   font-size: 180%;
   width: 30%;
   text-align: center;
@@ -82,11 +87,10 @@ h3 {
   transition-property: transform;
   transform-origin: 0 100%;
   transform: translateZ(0);
-  text-shadow: 1px 1px 0px rgba(140, 140, 140, 0.6);
 }
 
 .bullet:hover {
-  transform: skew(-20deg);
+  transform: skew(-15deg);
 }
 .bullet a {
   padding: 0;
@@ -94,8 +98,13 @@ h3 {
   display: block;
 }
 
-.code {
+.inline-code {
   font-family: "courier", "monospace";
+  font-weight: bold;
+}
+
+.codebox {
+  margin: 10px 0px 20px 0px;
 }
 
 /* target page */
