@@ -5,7 +5,7 @@ var db = leveldb('./data/stringgun.db');
 var randomSource = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 var randomness = 15;
 
-function random() {
+function randomString() {
   var result = [];
   var max = randomSource.length;
   for (var i = 0; i < randomness; i++) {
@@ -14,12 +14,12 @@ function random() {
   return result.join('');
 }
 
-// 3 fixed + 30 random characters
+// 3 fixed + 15 random characters
 function generateTargetName() {
-  return 'tar'+random();
+  return 'tar'+randomString();
 }
 function generateToken() {
-  return 'tok'+random();
+  return 'tok'+randomString();
 }
 
 function getToken(targetName, callback) {
